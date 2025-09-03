@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --background-dark: #000814;
+    --background: #001D3D;
+    --background-light: #003566;
+    --header-color: #FFC300;
+    --header-hover-color: #FFD60A;
+    --just-white: #f8f8f8;
+    --align-left: 10%;
+    --title: 10vh;
+    --subtitle: 4vh;
+    --text: 2.5vh;
+    --align-left:10%;
+}
+
+.dark {
+    --background: #18181b;
+}
+
+@font-face {
+    font-family: jose;
+    src: url('/fonts/JosefinSans-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: play;
+    src: url('/fonts/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: mont;
+    src: url('/fonts/Montserrat-Regular.ttf');
+}

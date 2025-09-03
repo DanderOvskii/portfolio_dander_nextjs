@@ -20,7 +20,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased scroll-smooth lg:subpixel-antialiased">
+      <body className="antialiased scroll-smooth lg:subpixel-antialiased bg-background-dark">
         <Providers>
           <Layout>
             {!noHeaderPaths.includes(pathname) && <Header />}
