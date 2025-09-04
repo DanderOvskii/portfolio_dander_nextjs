@@ -5,5 +5,5 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  return <div className="px-4 lg:max-w-7xl lg:mx-auto">{children}</div>;
+  return <div className="mr-align-left ml-align-left">{children}</div>;
 }
