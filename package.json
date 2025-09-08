@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
-    "@react-three/drei": "^10.7.4",
-    "@react-three/fiber": "^9.3.0",
+    "@react-three/drei": "^9.86.0",
+    "@react-three/fiber": "^8.13.2",
     "axios": "^1.7.7",
     "framer-motion": "^11.5.6",
     "jose": "^5.9.3",
@@ -20,7 +20,7 @@
     "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18",
-    "three": "^0.180.0"
+    "three": "^0.153.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

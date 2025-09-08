@@ -3,7 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const PianoScene = dynamic(() => import("./3D/models/pianoScene"), { ssr: false });
+const PianoScene = dynamic(() => import("./3D/scenes/pianoScene"), { ssr: false });
 const Welkom = () => {
     return (
         <div className="h-screen w-full flex flex-col md:flex-row">
@@ -14,7 +14,7 @@ const Welkom = () => {
                 </div>
             </div>
             <div className="w-1/2 screen relative float-right flex flex-col justify-center ml-align-left">
-                <div id="canvas"><PianoScene/></div>
+                <PianoScene/>
             </div>
         </div>
 

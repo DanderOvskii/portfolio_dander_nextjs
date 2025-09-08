@@ -34,3 +34,9 @@
     font-family: mont;
     src: url('/fonts/Montserrat-Regular.ttf');
 }
+
+@layer utilities {
+  .social-icon {
+    @apply filter invert w-[40px];
+  }
+}
