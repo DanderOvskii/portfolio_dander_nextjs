@@ -1,16 +1,17 @@
-"use client"; 
+"use client";
 
-
-import Image from "next/image";
 import Welkom from "@/components/Welkom"
-import Footer from "@/components/Footer";
+import AboutMe from "./components/AboutMe";
+import Projects from "./components/Projects";
 
 export default function Home() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center ">
       <Welkom />
-     
+      <AboutMe />
+      <Projects />
+
     </div>
-    
+
   );
 }

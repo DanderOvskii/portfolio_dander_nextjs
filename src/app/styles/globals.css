@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --background-dark: #000814;
     --background: #001D3D;
@@ -13,7 +17,7 @@
     --title: 10vh;
     --subtitle: 4vh;
     --text: 2.5vh;
-    --align-left:10%;
+    --align-left: 10%;
 }
 
 .dark {
@@ -36,7 +40,7 @@
 }
 
 @layer utilities {
-  .social-icon {
-    @apply filter invert w-[40px];
-  }
+    .social-icon {
+        @apply filter invert w-[40px];
+    }
 }

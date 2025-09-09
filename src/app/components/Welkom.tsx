@@ -1,4 +1,4 @@
-"use client"; 
+
 
 import React from "react";
 import dynamic from "next/dynamic";
@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 const PianoScene = dynamic(() => import("./3D/scenes/pianoScene"), { ssr: false });
 const Welkom = () => {
     return (
-        <div className="h-screen w-full flex flex-col md:flex-row">
+        <div id="welkom" className="h-screen w-full flex flex-col md:flex-row">
             <div className="w-1/2 screen relative float-left flex flex-col justify-center mr-align-left">
                 <div>
                     <p className="text-header-color text-title font-jose whitespace-nowrap">Hi! I Am</p>

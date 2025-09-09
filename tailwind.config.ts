@@ -29,7 +29,6 @@ const config: Config = {
         title:"var(--title)",
         subtitle:"var(--subtitle)",
         text:"var(--text)",
-        small:"var(--small)",
       },
       spacing: {
         "align-left": "var(--align-left)",

@@ -39,7 +39,7 @@ useEffect(() => {
       <div id="Menu" className={`fixed w-full h-dvh bg-background-light ${menuOpen ? "translate-y-0" : "-translate-y-full"} transition-all duration-500 flex flex-row right-0 z-10`}>
         <div className="w-1/2 screen relative float-left flex flex-col justify-center">
           <div className=" ml-align-left">
-            <a href="#top" onClick={() => setMenuOpen(false)} ><p className="relative font-medium text-title font-jose transition-all duration-500 hover:tracking-[10px] hover:text-header-color w-fit text-just-white" >home</p></a>
+            <a href="#welkom" onClick={() => setMenuOpen(false)} ><p className="relative font-medium text-title font-jose transition-all duration-500 hover:tracking-[10px] hover:text-header-color w-fit text-just-white" >home</p></a>
             <a href="#about" onClick={() => setMenuOpen(false)}><p className="relative font-medium text-title font-jose transition-all duration-500 hover:tracking-[10px] hover:text-header-color w-fit text-just-white ">about</p></a>
             <a href="#projects" onClick={() => setMenuOpen(false)}><p className="relative font-medium text-title font-jose transition-all duration-500 hover:tracking-[10px] hover:text-header-color w-fit text-just-white">projects</p></a>
           </div>
