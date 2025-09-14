@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User,Project } from "@prisma/client";
 import { NextRequest } from "next/server";
 
 export interface CustomUser {
@@ -11,4 +11,8 @@ export interface CustomRequest extends NextRequest {
 
 export type FormData = Omit<User, "dateOfBirth" | "id"> & {
   dateOfBirth: string;
+};
+
+export type ProjectFormData = Omit<Project, "id" | "createdAt" | "updatedAt"|"projectDate"> & {
+  projectDate: string;
 };

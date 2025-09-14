@@ -1,5 +1,5 @@
 import { clearUser, setUser } from "@/utils/sessionStorage";
-import { FormData } from "@/utils/types";
+import { FormData, ProjectFormData } from "@/utils/types";
 
 export async function loginUser(email: string, password: string) {
   try {
@@ -79,4 +79,39 @@ export async function logoutUser() {
     console.error("Error logging out:", error);
     throw error;
   }
+}
+
+export async function uploadImage(file: File) {
+  const res = await fetch("/api/v1/uploads", { 
+    method: "POST", 
+    body: file,
+    headers: {
+      'Content-Type': file.type,
+      'X-Filename': file.name,
+      'Content-Length': file.size.toString(),
+    }
+  });
+  if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || "Upload failed");
+  return res.json() as Promise<{ path: string }>;
+}
+
+export async function addProject(project:ProjectFormData) {
+  const response = await fetch("/api/v1/projects", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(project),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "Failed to add project");
+  }
+
+  return response.json();
+}
+
+export async function getProjects() {
+  const response = await fetch("/api/v1/projects");
+  if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to get projects");
+  return response.json() as Promise<Project[]>;
 }

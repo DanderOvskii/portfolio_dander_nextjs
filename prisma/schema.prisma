@@ -28,3 +28,15 @@ model User {
   role         Role
   dateOfBirth  DateTime
 }
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  projectDate DateTime
+  languages   String   // fixed typo: "laguages" → "languages"
+  image       String?  // made optional in case no image is provided
+  website     String?  // made optional since not all projects may have a site
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -3,6 +3,7 @@ import { CustomRequest } from "@/utils/types";
 import { unauthorized } from "@/utils/constants";
 import { verifyToken } from "@/utils/auth";
 
+
 export async function GET(request: CustomRequest) {
   const token = request.cookies.get("token");
 

@@ -1,4 +1,4 @@
-import { FormData } from "@/utils/types";
+import { FormData,ProjectFormData } from "@/utils/types";
 
 export const concert = {
   bandName: "Imagine Dragons",
@@ -31,4 +31,12 @@ export const initialFormData: FormData = {
   password: "",
   role: "USER",
   dateOfBirth: "",
+};
+export const initialProjectData: ProjectFormData = {
+  name: "",
+  description: "",
+  projectDate: "",
+  languages: "",
+  image: "",
+  website: "",
 };

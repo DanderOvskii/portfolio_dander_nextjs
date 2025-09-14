@@ -1,6 +1,9 @@
 import { SignJWT, jwtVerify } from "jose";
-import { CustomUser } from "@/utils/types";
+import { CustomUser,CustomRequest } from "@/utils/types";
 import { tokenAlgorithm, tokenExpiry } from "@/utils/constants";
+import { NextResponse } from "next/server";
+import { Role } from "@prisma/client";
+
 
 export async function generateToken(user: CustomUser) {
   const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -14,4 +17,30 @@ export async function verifyToken(token: string) {
   const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
   const { payload } = await jwtVerify(token, secret);
   return payload as unknown as CustomUser;
+}
+
+export async function requireAdmin(request: Request): Promise<CustomUser> {
+  const cookieHeader = request.headers.get('cookie');
+  if (!cookieHeader) {
+    throw new Error('Unauthorized');
+  }
+
+  const tokenMatch = cookieHeader.match(/token=([^;]+)/);
+  if (!tokenMatch) {
+    throw new Error('Unauthorized');
+  }
+
+  const token = tokenMatch[1];
+  
+  try {
+    const decoded = await verifyToken(token);
+    
+    if (!decoded?.userId || !decoded?.role || decoded.role !== Role.ADMIN) {
+      throw new Error('Forbidden');
+    }
+    
+    return decoded;
+  } catch (error) {
+    throw new Error('Unauthorized');
+  }
 }

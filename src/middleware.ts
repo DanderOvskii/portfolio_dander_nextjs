@@ -38,5 +38,7 @@ export async function middleware(request: CustomRequest) {
 export const config = {
   matcher: [
     "/admin/:path*", // Only run middleware for /admin routes
+    "/api/v1/projects/:path*",  // Add this
+    "/api/v1/uploads/:path*",
   ],
 };
