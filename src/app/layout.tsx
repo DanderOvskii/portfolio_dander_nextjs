@@ -10,8 +10,6 @@ import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 
 // Define paths where the Header should not be rendered
-const noHeaderPaths = ["/login", "/signup"];
-const noFooterPaths = ["/login", "/signup"];
 
 export default function RootLayout({
   children,
@@ -19,6 +17,14 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   const pathname = usePathname();
+  const noHeaderPaths = 
+  pathname === "/login"|| 
+  pathname === "/signup"||
+  pathname.startsWith("/projects");
+
+  const noFooterPaths = 
+  pathname === "/login"|| 
+  pathname === "/signup";
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -28,10 +34,10 @@ export default function RootLayout({
       <body className=" antialiased scroll-smooth lg:subpixel-antialiased bg-background-dark">
         <Providers>
           <Layout>
-            {!noHeaderPaths.includes(pathname) && <Header />}
+            {!noHeaderPaths && <Header />}
             {children}
           </Layout>
-          {!noFooterPaths.includes(pathname) && <Footer />}
+          {!noFooterPaths && <Footer />}
         </Providers>
       </body>
     </html>

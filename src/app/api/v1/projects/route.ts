@@ -32,3 +32,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: err?.message || "Failed to create project" }, { status: 500 });
   }
 }
+
+export async function GET() {
+  const projects = await prisma.project.findMany({
+    select: {
+      id: true,
+      name: true,
+      image: true,
+    }
+  });
+  return NextResponse.json(projects, { status: 200 });
+}

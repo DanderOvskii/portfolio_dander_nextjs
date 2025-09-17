@@ -34,7 +34,6 @@ export default function Dashboard() {
           e.target.value = ''; // Clear the input
           return;
         }
-        
         // Clear any previous errors
         setError(null);
       }
