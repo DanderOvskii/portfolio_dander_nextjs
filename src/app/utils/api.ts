@@ -1,6 +1,8 @@
 import { clearUser, setUser } from "@/utils/sessionStorage";
 import { FormData, ProjectFormData } from "@/utils/types";
 import { Project } from "@prisma/client";
+import { extractFilename } from "./helpers";
+import { promises } from "dns";
 
 export async function loginUser(email: string, password: string) {
   try {
@@ -83,8 +85,8 @@ export async function logoutUser() {
 }
 
 export async function uploadImage(file: File) {
-  const res = await fetch("/api/v1/uploads", { 
-    method: "POST", 
+  const res = await fetch("/api/v1/uploads", {
+    method: "POST",
     body: file,
     headers: {
       'Content-Type': file.type,
@@ -96,7 +98,19 @@ export async function uploadImage(file: File) {
   return res.json() as Promise<{ path: string }>;
 }
 
-export async function addProject(project:ProjectFormData) {
+export async function deleteImage(imagePath: string) {
+  const filename = extractFilename(imagePath);
+  const res = await fetch("/api/v1/uploads", {
+    method: "DELETE",
+    headers: { "X-Filename": filename }
+  });
+  if (!res.ok) {
+    throw new Error((await res.json().catch(() => ({}))).message || "Delete failed");
+  }
+  return res.json() as Promise<{ deleted: boolean }>;
+}
+
+export async function addProject(project: ProjectFormData) {
   const response = await fetch("/api/v1/projects", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -111,7 +125,7 @@ export async function addProject(project:ProjectFormData) {
   return response.json();
 }
 
-export async function getProjects():Promise<Project[]> {
+export async function getProjects(): Promise<Project[]> {
   const response = await fetch("/api/v1/projects");
   if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to get projects");
   return await response.json();
@@ -121,4 +135,18 @@ export async function getProject(id: string): Promise<Project> {
   const response = await fetch(`/api/v1/projects/${id}`);
   if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to get project");
   return await response.json();
+}
+
+export async function editProject(project: ProjectFormData, id: string) {
+  const response = await fetch(`/api/v1/projects/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(project),
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "Failed to edit project");
+  }
+
+  return response.json();
 }

@@ -52,3 +52,37 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: err?.message || "Upload failed" }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    await requireAdmin(request);
+
+    let filePath = request.headers.get("X-Filename")
+
+    if (!filePath) {
+      try {
+        const body = await request.json();
+        filePath = body?.path;
+      } catch {}
+    }
+
+    if (!filePath) {
+      return NextResponse.json({ message: "No path provided" }, { status: 400 });
+    }
+
+    if (!filePath.startsWith("/uploads/")) {
+      return NextResponse.json({ message: "Invalid path" }, { status: 400 });
+    }
+
+    const uploadsDir = path.join(process.cwd(), "public", "uploads");
+    const absPath = path.join(uploadsDir, path.basename(filePath)); // sanitize to filename
+
+    await fs.unlink(absPath).catch((err: any) => {
+      if (err?.code !== "ENOENT") throw err; // ignore if not found (idempotent)
+    });
+
+    return NextResponse.json({ deleted: true }, { status: 200 });
+  } catch (err: any) {
+    return NextResponse.json({ message: err?.message || "Delete failed" }, { status: 500 });
+  }
+}

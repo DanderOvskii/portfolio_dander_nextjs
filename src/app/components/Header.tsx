@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { logoutUser } from "@/utils/api";
 import { genericErrors } from "@/utils/constants";
 import styles from "@/styles/button48.module.css";
+import { getUser } from "@/utils/sessionStorage";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+ 
 
 useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,10 @@ useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const user = getUser()
+  const isLoggedIn = Boolean(user?.id || user?.email);
+  console.log(user)
 
   return (
     <>
@@ -50,13 +56,15 @@ useEffect(() => {
             <a href="./contact.php" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
               <button className={styles.button48} role="button"><span>contact me</span></button>
             </a>
-
           </div>
+          {isLoggedIn &&(
+
           <div className="relative flex flex-col justify-center items-center gap-5">
               <button onClick={logoutUser} className={styles.button48} role="button"><span>logout</span></button>
             
 
           </div>
+          )}
 
         </div>
 

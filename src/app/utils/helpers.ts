@@ -58,3 +58,7 @@ export const isValidDate = (dateString: string): boolean => {
   const date = new Date(dateString);
   return !isNaN(date.getTime());
 };
+
+export function extractFilename(imagePath: string) {
+  return imagePath.split("/").pop() || "";
+}

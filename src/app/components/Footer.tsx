@@ -8,7 +8,7 @@ const Footer = () => {
     const socaialIcons = ""
     return (
         <>
-            <footer className="h-[300px] w-full bg-black z-9 relative flex">
+            <footer className="h-[300px] w-full bg-black z-9 relative flex ">
 
                 <div className="w-1/2 screen relative float-right flex flex-col  ml-align-left items-start">
                     <div className="w-4/5">
