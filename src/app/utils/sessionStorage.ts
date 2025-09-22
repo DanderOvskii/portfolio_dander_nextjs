@@ -5,6 +5,7 @@ export const setUser = (user: User) => {
 };
 
 export const getUser = () => {
+  if (typeof window === "undefined") return {};
   return JSON.parse(sessionStorage.getItem("user") || "{}");
 };
 

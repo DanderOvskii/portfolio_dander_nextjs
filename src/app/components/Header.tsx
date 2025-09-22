@@ -30,7 +30,6 @@ useEffect(() => {
 
   const user = getUser()
   const isLoggedIn = Boolean(user?.id || user?.email);
-  console.log(user)
 
   return (
     <>
@@ -53,7 +52,7 @@ useEffect(() => {
 
         <div className="w-1/2 screen relative float-right flex flex-col justify-center items-center">
           <div className="relative flex flex-col justify-center items-center gap-5">
-            <a href="./contact.php" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
+            <a href="/contact" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
               <button className={styles.button48} role="button"><span>contact me</span></button>
             </a>
           </div>

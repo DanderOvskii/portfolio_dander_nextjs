@@ -10,7 +10,6 @@ const Projects = () => {
     useEffect(() => {
         getProjects().then(setProjects);
     }, []);
-    console.log(projects);
 
     return (
         <div id="projects" className=" flex flex-col items-center justify-center ">

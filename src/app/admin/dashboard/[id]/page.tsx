@@ -3,11 +3,12 @@ import Image from "next/image";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { ProjectFormData } from "@/utils/types";
 import { initialProjectData, genericErrors } from "@/utils/constants";
-import { uploadImage, editProject, getProject } from "@/utils/api";
+import { uploadImage, editProject, getProject, deleteImage } from "@/utils/api";
 import { useParams } from "next/navigation";
 
 export default function Dashboard() {
     const [formData, setFormData] = useState<ProjectFormData>(initialProjectData);
+    const [originalImage, setOriginalImage] = useState<string|null>("");
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const params = useParams<{ id: string }>();
@@ -21,7 +22,7 @@ export default function Dashboard() {
           setFormData({
             ...data,
             projectDate: new Date(data.projectDate).toISOString().split("T")[0],
-          });
+          }),setOriginalImage(data.image);
         })
         .catch((e) => setError(e?.message || "failed to load project"));
     }, [id]);
@@ -61,28 +62,37 @@ export default function Dashboard() {
       setLoading(true);
       setError(null);
     
+      let imagePath: string | null = null;
       try {
         // 1) Upload image first (optional)
-        let imagePath: string | null = null;
         if (file) {
           const { path } = await uploadImage(file);
           imagePath = path; // e.g. "/uploads/123-abc.png"
         }
     
-        // 2) Create project with the returned path
-        await editProject({
+        const payload: any = {
           name: formData.name,
           description: formData.description,
-          projectDate: formData.projectDate, // "yyyy-mm-dd"
+          projectDate: formData.projectDate,
           languages: formData.languages,
           website: formData.website || null,
-          image: imagePath,
-        },id);
+          ...(file ? { image: imagePath } : {}), // omit image if not replacing
+        };
+    
+        await editProject(payload, id);
+
+        if (file && originalImage && originalImage !== imagePath) {
+          await deleteImage(originalImage).catch(() => {}); // best-effort
+        }
+    
     
         setFormData(initialProjectData);
         setFile(null);
         window.location.href = "/admin"
       } catch (error) {
+        if (imagePath) {
+          await deleteImage(imagePath).catch(() => {});
+        }
         setError((error as Error).message || genericErrors.signupFailed);
       } finally {
         setLoading(false);

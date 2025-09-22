@@ -8,7 +8,6 @@ const Projects = () => {
     useEffect(() => {
         getProjects().then(setProjects);
     }, []);
-    console.log(projects);
 
     return (
         <div id="projects" className="h-screen w-screen flex flex-col items-center justify-center bg-background rounded-tl-[200px] rounded-tr-[200px] ">

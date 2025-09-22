@@ -100,6 +100,7 @@ export async function uploadImage(file: File) {
 
 export async function deleteImage(imagePath: string) {
   const filename = extractFilename(imagePath);
+  console.log("filename",filename)
   const res = await fetch("/api/v1/uploads", {
     method: "DELETE",
     headers: { "X-Filename": filename }

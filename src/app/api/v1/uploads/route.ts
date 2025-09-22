@@ -57,25 +57,32 @@ export async function DELETE(request: Request) {
   try {
     await requireAdmin(request);
 
-    let filePath = request.headers.get("X-Filename")
+    let filename = request.headers.get("X-Filename")
 
-    if (!filePath) {
+    if (!filename) {
       try {
         const body = await request.json();
-        filePath = body?.path;
+        filename = body?.path;
       } catch {}
     }
 
-    if (!filePath) {
+    if (!filename) {
       return NextResponse.json({ message: "No path provided" }, { status: 400 });
     }
 
-    if (!filePath.startsWith("/uploads/")) {
-      return NextResponse.json({ message: "Invalid path" }, { status: 400 });
+    const base = path.basename(filename);
+    if (base !== filename){
+      return NextResponse.json({message:"invalid filename"},{status:400});
+    }
+
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+    if (!allowedExtensions.includes(path.extname(base.toLowerCase()))){
+      return NextResponse.json({message:"invalid file type"},{status:400});
+
     }
 
     const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    const absPath = path.join(uploadsDir, path.basename(filePath)); // sanitize to filename
+    const absPath = path.join(uploadsDir, base); // sanitize to filename
 
     await fs.unlink(absPath).catch((err: any) => {
       if (err?.code !== "ENOENT") throw err; // ignore if not found (idempotent)
