@@ -151,3 +151,9 @@ export async function editProject(project: ProjectFormData, id: string) {
 
   return response.json();
 }
+
+export async function deleteProject(id:number){
+  const response = await fetch(`/api/v1/projects/${id}`, { method: "DELETE" });
+  if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to delete project");
+  return await response.json() as Promise<{ deleted: boolean }>;
+}

@@ -67,3 +67,20 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 
 
 }
+
+export async function DELETE(request:Request,{ params }: { params: { id: string } }){
+  try{
+    await requireAdmin(request);
+    const id = Number(params.id);
+    if (!id) {
+      return NextResponse.json({ message: "missing id" }, { status: 400 });
+    }
+    await prisma.project.delete({ where: { id } });
+    return NextResponse.json({ deleted: true }, { status: 200 });
+  }
+  catch (err: any) {
+    const message = err?.message || "Failed to delete project";
+    const status = message.includes("Record to delete does not exist") ? 404 : 500;
+    return NextResponse.json({ message }, { status });
+  }
+}
