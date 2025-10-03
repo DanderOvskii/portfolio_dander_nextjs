@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
-import { CustomUser,CustomRequest } from "@/utils/types";
+import { CustomUser } from "@/utils/types";
 import { tokenAlgorithm, tokenExpiry } from "@/utils/constants";
-import { NextResponse } from "next/server";
 import { Role } from "@prisma/client";
 
 
@@ -40,7 +39,7 @@ export async function requireAdmin(request: Request): Promise<CustomUser> {
     }
     
     return decoded;
-  } catch (error) {
+  } catch {
     throw new Error('Unauthorized');
   }
 }

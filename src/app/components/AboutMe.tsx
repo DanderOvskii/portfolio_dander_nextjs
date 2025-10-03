@@ -12,7 +12,7 @@ const AboutMe = () => {
             <div className="w-1/2 screen relative float-right flex flex-col justify-center ">
                 <div>
                     <p className="text-header-color text-title font-jose mb-[20px]">About Me</p>
-                    <p className="text-just-white text-text font-play mb-[20px]">I'am a multifaceted enthusiast deeply engrossed in software development, 3D modeling, and fitness. In the realm of software, they thrive on problem-solving and embrace the evolving landscape of code. </p>
+                    <p className="text-just-white text-text font-play mb-[20px]">I&apos;am a multifaceted enthusiast deeply engrossed in software development, 3D modeling, and fitness. In the realm of software, they thrive on problem-solving and embrace the evolving landscape of code. </p>
                     <div className="flex flex-row items-center gap-4 ">
                         <a className="block w-[40px] hover:scale-[1.2] transition-transform duration-200" href="https://github.com/DanderOvskii?tab=repositories" target="_blank">
                             <img src="icons/square-git.svg" className="social-icon" alt=""/>

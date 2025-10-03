@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
+    const uploadsDir = path.join(process.cwd(),"uploads");
     await fs.mkdir(uploadsDir, { recursive: true });
 
     // Generate unique filename
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 
     await fs.writeFile(filePath, buffer);
 
-    return NextResponse.json({ path: `/uploads/${uniqueFilename}` }, { status: 201 });
+    return NextResponse.json({ path: `/api/v1/uploads/${uniqueFilename}` }, { status: 201 });
   } catch (err: any) {
     return NextResponse.json({ message: err?.message || "Upload failed" }, { status: 500 });
   }
@@ -81,7 +81,7 @@ export async function DELETE(request: Request) {
 
     }
 
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
+    const uploadsDir = path.join(process.cwd(),"uploads");
     const absPath = path.join(uploadsDir, base); // sanitize to filename
 
     await fs.unlink(absPath).catch((err: any) => {
@@ -93,3 +93,4 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ message: err?.message || "Delete failed" }, { status: 500 });
   }
 }
+

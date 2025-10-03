@@ -7,7 +7,7 @@ import { Project } from "@prisma/client";
 import styles from "@/styles/button48.module.css";
 
 
-const project = () => {
+const ProjectPage = () => {
     const params = useParams<{ id: string }>();
     const id = params.id as string;
     const [project, setProject] = useState<Project>()
@@ -30,7 +30,7 @@ const project = () => {
     return (
         <>
             <div className="w-[85%] h-screen left-0 float-left">
-                <img className="h-full w-full object-cover" src={project?.image} alt={project?.name} />
+                <img className="h-full w-full object-cover" src={project?.image||''} alt={project?.name} />
             </div>
 
             <div className="right-0 w-1/5 pt-8 pl-8 h-screen fixed float-right rounded-tl-[50px] rounded-bl-[50px] bg-background text-just-white">
@@ -54,4 +54,4 @@ const project = () => {
         </>
     );
 }
-export default project;
+export default ProjectPage;

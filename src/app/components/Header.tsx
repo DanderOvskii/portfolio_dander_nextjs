@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { logoutUser } from "@/utils/api";
-import { genericErrors } from "@/utils/constants";
 import styles from "@/styles/button48.module.css";
 import { getUser } from "@/utils/sessionStorage";
 
@@ -28,8 +27,11 @@ useEffect(() => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const user = getUser()
-  const isLoggedIn = Boolean(user?.id || user?.email);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const user = getUser();
+    setIsLoggedIn(Boolean(user?.id || user?.email));
+  }, []);
 
   return (
     <>

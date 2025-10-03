@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { requireAdmin } from "@/utils/auth";
@@ -6,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function GET(
   _request: Request,
-  { params }: { params: { id: String } }
+  { params }: { params: { id: string } }
 ) {
   try {
     const id = Number(params.id)

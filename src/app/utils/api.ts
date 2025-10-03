@@ -2,7 +2,6 @@ import { clearUser, setUser } from "@/utils/sessionStorage";
 import { FormData, ProjectFormData } from "@/utils/types";
 import { Project } from "@prisma/client";
 import { extractFilename } from "./helpers";
-import { promises } from "dns";
 
 export async function loginUser(email: string, password: string) {
   try {
@@ -127,13 +126,13 @@ export async function addProject(project: ProjectFormData) {
 }
 
 export async function getProjects(): Promise<Project[]> {
-  const response = await fetch("/api/v1/projects");
+  const response = await fetch("/api/v1/projects",{cache:"no-store"});
   if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to get projects");
   return await response.json();
 }
 
 export async function getProject(id: string): Promise<Project> {
-  const response = await fetch(`/api/v1/projects/${id}`);
+  const response = await fetch(`/api/v1/projects/${id}`,{cache:"no-store"});
   if (!response.ok) throw new Error((await response.json().catch(() => ({}))).message || "Failed to get project");
   return await response.json();
 }

@@ -1,8 +1,6 @@
 "use client";
 
 import { useGLTF } from "@react-three/drei";
-import { use } from "react";
-const zoom = 10
 const CharacterModel = () => {
     useGLTF.preload("/mannetje.glb");
     const gltf = useGLTF("/mannetje.glb"); // Path relative to public/

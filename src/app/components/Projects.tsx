@@ -1,7 +1,8 @@
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProjects } from '@/utils/api';
 import { Project } from '@prisma/client';
 import Link from 'next/link';
+import Image from 'next/image';
 const Projects = () => {
     const [projects, setProjects] = useState<Project[]>([]);
 
@@ -20,10 +21,13 @@ const Projects = () => {
                     >
                         <Link href={`projects/${project.id}` || ''} className="h-4/5 aspect-square">
                             <div className="h-full aspect-square bottom-0 rounded-[20px] shadow-[0px_30px_8px_-13px_rgba(0,0,0,0.27)] transition-all ease-in-out duration-300 group-hover:shadow-[0px_45px_12px_-13px_rgba(0,0,0,0.27)]">
-                                <img
+                                <Image
                                     src={project.image || ''}
                                     alt={project.name}
                                     className="w-full h-full object-cover rounded-[20px] contrast-50 grayscale transition-all ease-in-out duration-300 group-hover:contrast-100 group-hover:grayscale-0"
+                                    width={300}
+                                    height={300}
+                                    priority
                                 />
                             </div>
                         </Link>

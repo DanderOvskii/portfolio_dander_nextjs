@@ -1,11 +1,8 @@
 "use client";
-
-import react from "react";
 import styles from "@/styles/button48.module.css";
 
 
 const Footer = () => {
-    const socaialIcons = ""
     return (
         <>
             <footer className="h-[300px] w-full bg-black z-9 relative flex ">
@@ -31,7 +28,7 @@ const Footer = () => {
                 </div>
                 <div className="w-1/2 screen relative float-left flex flex-col mr-align-left items-end">
                     <div className="w-1/3 text-right">
-                        <p className="text-header-color font-jose relative mt-[20px] mb-25px text-[50px] ">let's work <br/> together</p>
+                        <p className="text-header-color font-jose relative mt-[20px] mb-25px text-[50px] ">let&apos;s work <br/> together</p>
                         <a href="./contact.php" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
                             <button className={styles.button48} role="button"><span>contact me</span></button>
                         </a>

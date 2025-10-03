@@ -7,8 +7,6 @@ import { logoutUser } from "@/utils/api";
 export async function middleware(request: CustomRequest) {
   const { pathname } = request.nextUrl;
 
-  const token = request.cookies.get("token");
-
  if (pathname.startsWith("/admin")) {
     const token = request.cookies.get("token");
 

@@ -1,6 +1,6 @@
 "use client";
 
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProjects } from '@/utils/api';
 import { Project } from '@prisma/client';
 import Link from 'next/link';

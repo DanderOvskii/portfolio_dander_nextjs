@@ -27,6 +27,13 @@ export async function POST(request: CustomRequest) {
     );
   }
 
+  if (!isValidDate(dateOfBirth)) {
+    return NextResponse.json(
+      { message: "Invalid date of birth" },
+      { status: 400 }
+    );
+  }
+
   // Check if the email is already taken
   const existingUser = await prisma.user.findUnique({
     where: { email },
@@ -45,7 +52,7 @@ export async function POST(request: CustomRequest) {
 
   const user = await prisma.user.create({
     data: {
-      dateOfBirth: isValidDate(dateOfBirth) ? new Date(dateOfBirth) : null,
+      dateOfBirth: new Date(dateOfBirth),
       email,
       firstName,
       lastName,

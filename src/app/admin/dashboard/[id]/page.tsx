@@ -22,7 +22,8 @@ export default function Dashboard() {
           setFormData({
             ...data,
             projectDate: new Date(data.projectDate).toISOString().split("T")[0],
-          }),setOriginalImage(data.image);
+          });
+          setOriginalImage(data.image);
         })
         .catch((e) => setError(e?.message || "failed to load project"));
     }, [id]);
