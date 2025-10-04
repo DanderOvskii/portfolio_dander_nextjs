@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: CustomRequest) {
   const baseUrl = new URL(request.url).origin;
-  const response = NextResponse.redirect(`${baseUrl}/login`);
+  const response = NextResponse.redirect(`${baseUrl}/`);
 
   response.cookies.set("token", "", {
     httpOnly: true,

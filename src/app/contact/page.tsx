@@ -19,9 +19,6 @@ export default function ContactPage() {
               <span className="text-just-white/80">Phone:</span>
               <div>+31 6 489 603 53</div>
             </div>
-            <div>
-              <a className="underline" href="mailto:info@snappy.io">Customer Support</a>
-            </div>
           </div>
         </div>
       </div>

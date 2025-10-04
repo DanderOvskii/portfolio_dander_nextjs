@@ -9,9 +9,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
- 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-useEffect(() => {
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
         // scrolling down → hide
@@ -27,10 +28,10 @@ useEffect(() => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const user = getUser();
     setIsLoggedIn(Boolean(user?.id || user?.email));
+    console.log("isLoggedIn:", isLoggedIn);
   }, []);
 
   return (
@@ -58,13 +59,12 @@ useEffect(() => {
               <button className={styles.button48} role="button"><span>contact me</span></button>
             </a>
           </div>
-          {isLoggedIn &&(
-
-          <div className="relative flex flex-col justify-center items-center gap-5">
-              <button onClick={logoutUser} className={styles.button48} role="button"><span>logout</span></button>
-            
-
-          </div>
+          {isLoggedIn && (
+            <div className="relative flex flex-col justify-center items-center gap-5">
+              <button onClick={logoutUser} className={styles.button48} role="button">
+                <span>logout</span>
+              </button>
+            </div>
           )}
 
         </div>

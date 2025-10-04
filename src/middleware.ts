@@ -25,7 +25,7 @@ export async function middleware(request: CustomRequest) {
       request.user = { userId: decoded.userId, role: decoded.role };
       return NextResponse.next();
     } catch {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

@@ -35,13 +35,13 @@ export async function GET(
       '.webp': 'image/webp'
     };
     
-    return new NextResponse(file, {
+    return new NextResponse(new Uint8Array(file), {
       headers: {
         "Content-Type": mimeTypes[ext] || 'image/jpeg',
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "File not found" }, { status: 404 });
   }
 }
