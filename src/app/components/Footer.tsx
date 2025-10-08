@@ -5,9 +5,9 @@ import styles from "@/styles/button48.module.css";
 const Footer = () => {
     return (
         <>
-            <footer className="h-[300px] w-full bg-black z-9 relative flex ">
+            <footer className="h-[600px] w-screen bg-black z-9  pl-align-left pr-align-left justify-between relative flex flex-col md:flex-row md:h-[300px]"> 
 
-                <div className="w-1/2 screen relative float-right flex flex-col  ml-align-left items-start">
+                <div className="screen relative w-full flex flex-col items-start">
                     <div className="w-4/5">
                         <p className="text-header-color font-jose text-[50px] mt-5 mb-[25px] relative ml-0">my socials</p>
                         <div className="flex flex-row gap-[10px] alighn-center mt-[10px]">
@@ -26,8 +26,8 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-1/2 screen relative float-left flex flex-col mr-align-left items-end">
-                    <div className="w-1/3 text-right">
+                <div className="screen relative w-full flex flex-col items-start md:items-end">
+                    <div className="text-right">
                         <p className="text-header-color font-jose relative mt-[20px] mb-25px text-[50px] ">let&apos;s work <br/> together</p>
                         <a href="./contact.php" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
                             <button className={styles.button48} role="button"><span>contact me</span></button>

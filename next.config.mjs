@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
     domains: ["images2.alphacoders.com", "localhost"],
     remotePatterns: [
