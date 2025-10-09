@@ -1,13 +1,14 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:20-alpine AS base
+# Base image
+FROM node:18-alpine AS base
+WORKDIR /app
+
+# Install basic dependencies required by Prisma
+RUN apk add --no-cache libc6-compat bash openssl postgresql-client
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-
-# Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -16,50 +17,51 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Rebuild the source code only when needed
+# Build the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# 👇👇 ADD THIS STEP — important for Prisma
+# Generate Prisma client
 RUN npx prisma generate
-
-# Optionally disable Next telemetry during build
-# ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build Next.js
 RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
+  if [ -f yarn.lock ]; then yarn build; \
   elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
 # Production image
-FROM base AS runner
+FROM node:18-alpine AS runner
 WORKDIR /app
 
+# Production environment
 ENV NODE_ENV=production
-# ENV NEXT_TELEMETRY_DISABLED=1
-RUN apk add --no-cache postgresql-client bash
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Install runtime dependencies
+RUN apk add --no-cache libc6-compat bash openssl postgresql-client
+
+# Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Copy built app and Prisma client
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# 👇 If your Prisma client is needed at runtime, copy it too
+COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=builder /app/prisma ./prisma
 
 USER nextjs
 
 EXPOSE 3000
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
 
+# Start server with Prisma migration check
 CMD ["sh", "-c", "until pg_isready -h db -p 5432; do echo 'Waiting for DB...'; sleep 1; done; npx prisma migrate deploy && node server.js"]
