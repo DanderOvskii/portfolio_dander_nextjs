@@ -9,7 +9,7 @@ const Footer = () => {
 
                 <div className="screen relative w-full flex flex-col items-start">
                     <div className="w-4/5">
-                        <p className="text-header-color font-jose text-[50px] mt-5 mb-[25px] relative ml-0">my socials</p>
+                        <p className="text-header-color font-jose text-[50px] mt-5 mb-[25px] relative ml-0">socials</p>
                         <div className="flex flex-row gap-[10px] alighn-center mt-[10px]">
                             <img src="icons/square-git.svg" className="social-icon" alt="" />
                             <a className="text-decoration:none" href="https://github.com/DanderOvskii?tab=repositories" target="_blank"><p className="text-just-white font-play text-[30px] transition-all duration-500 hover:tracking-[10px] hover:text-header-color">GitHub</p></a>
