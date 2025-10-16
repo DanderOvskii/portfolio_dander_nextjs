@@ -60,11 +60,11 @@ const Header = () => {
             </a>
           </div>
           {isLoggedIn && (
-            <div className="relative flex flex-col justify-center items-center gap-5">
-              <button onClick={logoutUser} className={styles.button48} role="button">
+            <button onClick={logoutUser} className="relative flex flex-col justify-center items-center gap-5">
+              <button className={styles.button48} role="button">
                 <span>logout</span>
               </button>
-            </div>
+            </button>
           )}
 
         </div>

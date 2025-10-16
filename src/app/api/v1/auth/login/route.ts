@@ -22,9 +22,9 @@ export async function POST(request: CustomRequest) {
     return NextResponse.json({ message: invalidCredentials }, { status: 401 });
   }
 
-  const baseUrl = new URL(request.url).origin;
-  const redirectUrl =
-    user.role === Role.ADMIN ? `${baseUrl}/admin` : `${baseUrl}/`;
+   const redirectUrl = user.role === Role.ADMIN 
+    ? '/admin/dashboard'  // Change to direct path
+    : '/';
 
   const response = NextResponse.json({
     redirectUrl,

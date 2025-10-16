@@ -22,6 +22,7 @@ export async function middleware(request: CustomRequest) {
         return NextResponse.redirect(new URL("/", request.url));
       }
 
+
       request.user = { userId: decoded.userId, role: decoded.role };
       return NextResponse.next();
     } catch {
