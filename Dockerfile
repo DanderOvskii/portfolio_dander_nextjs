@@ -11,7 +11,7 @@ RUN apk add --no-cache libc6-compat bash openssl postgresql-client git
 FROM base AS deps
 
 # Clone the repository
-ARG REPO_URL = https://github.com/DanderOvskii/portfolio_dander_nextjs.git
+ARG REPO_URL=https://github.com/DanderOvskii/portfolio_dander_nextjs.git
 ARG REPO_BRANCH=main
 RUN git clone --depth 1 --branch $REPO_BRANCH $REPO_URL . || (echo "Git clone failed" && exit 1)
 
