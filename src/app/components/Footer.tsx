@@ -29,7 +29,7 @@ const Footer = () => {
                 <div className="screen relative w-full flex flex-col items-start md:items-end">
                     <div className="text-right">
                         <p className="text-header-color font-jose relative mt-[20px] mb-25px text-[50px] ">let&apos;s work <br/> together</p>
-                        <a href="./contact.php" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
+                        <a href="/contact" className=" no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " >
                             <button className={styles.button48} role="button"><span>contact me</span></button>
                         </a>
                     </div>

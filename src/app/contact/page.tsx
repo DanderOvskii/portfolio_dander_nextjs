@@ -1,8 +1,12 @@
-"use client";
+import { Metadata } from "next"
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Here is how you can reach me',
+}
 export default function ContactPage() {
   return (
     <>
-   
+
 
       <div className="right-0 w-2/5 pt-8 pl-8 h-screen text-just-white flex">
         <div className="flex flex-col justify-center ">
