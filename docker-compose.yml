@@ -2,12 +2,21 @@ version: '3.9'
 
 services:
   web:
-    image: dander_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REPO_URL: https://github.com/DanderOvskii/portfolio_dander_nextjs.git
+        REPO_BRANCH: main
     container_name: nextjs_app
     ports:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:J03B1d0n@db:5432/dandersdb
+      - JWT_SECRET=C>_:JNY2?AdBwon9sbogqK6igjUBZ4
+      - NODE_ENV=production
+      - PRISMA_ENABLE_TRACING=false
+      - PRISMA_LOG_LEVEL=info
     depends_on:
       - db
     restart: always
@@ -17,15 +26,15 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: J03B1d0n
+      POSTGRES_DB: dandersdb
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      test: ["CMD-SHELL", "pg_isready -U $postgres"]
       interval: 5s
       timeout: 5s
       retries: 10

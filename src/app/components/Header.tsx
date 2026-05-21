@@ -38,7 +38,7 @@ const Header = () => {
     <>
       <div className={`w-full h-[10vh] hidden md:flex items-center justify-start fixed font-[jose] z-10 transition-all ease-in-out duration-1000 ${isVisible ? "translate-y-0" : "-translate-y-[10vh]"}`}>
         <div className="w-1/2 flex justify-between items-center gap-[50px] ">
-          <a className="no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " href="/#top"><p className="transition-all duration-500 hover:tracking-[10px]">home</p></a>
+          <a className="no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " href="/#top"><p>home</p></a>
           <a className="no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " href="/#about"><p>about</p></a>
           <a className="no-underline text-just-white text-subtitle transition-all ease-in-out duration-200 hover:text-header-color " href="/#projects"><p>projects</p></a>
         </div>
