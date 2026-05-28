@@ -32,7 +32,7 @@ const Projects = () => {
             <p className="text-header-color text-title font-jose whitespace-nowrap " >projects</p>
             <div className="w-full flex gap-5 flex-wrap justify-center items-center select-cont">
                 <div className="group h-64 aspect-square flex justify-center items-center flex-col transition-all ease-in-out duration-300 hover:scale-110 hover:mb-[60px]">
-                    <Link href={"admin/dashboard/addProject"} className="h-4/5 aspect-square">
+                    <Link href={"admin/addProject"} className="h-4/5 aspect-square">
                         <div className="h-full bg-black aspect-square rounded-[20px] shadow-[0px_30px_8px_-13px_rgba(0,0,0,0.27)] transition-all ease-in-out duration-300 group-hover:shadow-[0px_45px_12px_-13px_rgba(0,0,0,0.27)]">
                             <p className="w-full h-full  flex justify-center items-center text-title text-header-color rounded-[20px] contrast-50 grayscale transition-all ease-in-out duration-300 group-hover:contrast-100 group-hover:grayscale-0">+</p>
                         </div>
@@ -42,7 +42,7 @@ const Projects = () => {
                 {projects && projects.map((project) => (
                     <div key={project.id} className="group h-64 aspect-square flex justify-center items-center flex-col transition-all ease-in-out duration-300 hover:scale-110 hover:mb-[60px]">
                         <button  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" onClick={() => handleDelete(project.id,project.image||"")}>delete</button>
-                        <Link href={`admin/dashboard/${project.id}` || ''} className="h-4/5 aspect-square">
+                        <Link href={`admin/${project.id}` || ''} className="h-4/5 aspect-square">
                             <div className="h-full aspect-square bottom-0 rounded-[20px] shadow-[0px_30px_8px_-13px_rgba(0,0,0,0.27)] transition-all ease-in-out duration-300 group-hover:shadow-[0px_45px_12px_-13px_rgba(0,0,0,0.27)]">
                                 <img
                                     src={project.image || ''}

@@ -23,7 +23,7 @@ export async function POST(request: CustomRequest) {
   }
 
    const redirectUrl = user.role === Role.ADMIN 
-    ? '/admin/dashboard'  // Change to direct path
+    ? '/admin'  // Change to direct path
     : '/';
 
   const response = NextResponse.json({
